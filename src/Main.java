@@ -1,31 +1,35 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+/*Crea un oggetto data da questa stringa 2023-03-01T13:00:00Z
+Ottieni l'anno
+Ottieni il mese
+Ottieni il giorno
+Ottieni il giorno della settimana
+Stampa i risultati sulla console -Crea dei test per questo esercizio*/
 import java.time.DayOfWeek;
+import java.time.OffsetDateTime;
+
+
 
 public class Main {
+    public static String dateString = "2023-03-01T13:00:00Z";
 
-    public static void main(String[] args) {
-        String dateString = "2023-03-01T13:00:00Z";
+    public static void main(String[] args){
+        //Crea un oggetto OffsetDateTime dalla Stringa
+        OffsetDateTime dateTime = OffsetDateTime.parse(dateString);
 
-        // Creazione di LocalDateTime dalla stringa
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_DATE_TIME);
+        //Ottieni anno, mese, giorno, giorno della settimana
+        Result result = getResult(dateTime);
+    }
 
-        // Ottieni l'anno
+    static Result getResult(OffsetDateTime dateTime){
         int year = dateTime.getYear();
-
-        // Ottieni il mese
         int month = dateTime.getMonthValue();
-
-        // Ottieni il giorno
         int day = dateTime.getDayOfMonth();
-
-        // Ottieni il giorno della settimana
         DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
+        Result result = new Result(year, month, day, dayOfWeek);
+        return result;
+    }
 
-        // Stampa i risultati sulla console
-        System.out.println("Anno: " + year);
-        System.out.println("Mese: " + month);
-        System.out.println("Giorno: " + day);
-        System.out.println("Giorno della settimana: " + dayOfWeek);
+    public record Result(int year, int month, int day, DayOfWeek dayOfWeek){
+
     }
 }

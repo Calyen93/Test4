@@ -1,23 +1,26 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+/*Crea un oggetto data da questa stringa 2023-03-01T13:00:00Z
+Ottieni l'anno
+Ottieni il mese
+Ottieni il giorno
+Ottieni il giorno della settimana
+Stampa i risultati sulla console -Crea dei test per questo esercizio*/
+
 import org.junit.jupiter.api.Test;
-import java.time.LocalDateTime;
+
 import java.time.DayOfWeek;
+import java.time.OffsetDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
 
     @Test
-    public void testDateComponents() {
-        String dateString = "2023-03-01T13:00:00Z";
-        LocalDateTime dateTime = LocalDateTime.parse(dateString);
+    public void checkResult(){
+        OffsetDateTime expectedDate = OffsetDateTime.parse(Main.dateString);
+        Main.Result result = Main.getResult(expectedDate);
 
-        int year = dateTime.getYear();
-        int month = dateTime.getMonthValue();
-        int day = dateTime.getDayOfMonth();
-        DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
+        Main.Result expectedResult = new Main.Result(2023,03,01, DayOfWeek.WEDNESDAY);
 
-        assertEquals(2023, year);
-        assertEquals(3, month);
-        assertEquals(1, day);
-        assertEquals(DayOfWeek.WEDNESDAY, dayOfWeek);
+        assertEquals(expectedResult, result);
     }
 }
